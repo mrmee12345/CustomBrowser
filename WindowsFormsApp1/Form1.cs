@@ -6,12 +6,16 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+
+        private string currentURL = "";
+
         //List<string> History = new List<string>();
 
         public Form1()
@@ -21,14 +25,27 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            webBrowser.Navigate("www.duckduckgo.com");
-            SearchBar.Text = "www.duckduckgo.com";
+            webBrowser.Navigate("www.google.com");
+            //SearchBar.Text = "www.duckduckgo.com";
+
+            // Start a background thread
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    // Code to run continuously
+                    UpdateUI();
+                    Thread.Sleep(1000); // Sleep for 1 second
+                }
+            });
         }
 
-        private void webBrowser14_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        private void webBrowser10_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            
+            currentURL = webBrowser.Url.ToString();
+            tabControl.SelectedTab.Text = webBrowser.DocumentTitle;
         }
+
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -74,8 +91,9 @@ namespace WindowsFormsApp1
 
         }
 
-        private void webBrowser10_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        private void webBrowser14_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+            currentURL = webBrowser.Url.ToString();
             tabControl.SelectedTab.Text = webBrowser.DocumentTitle;
         }
 
@@ -135,5 +153,25 @@ namespace WindowsFormsApp1
         {
             tabControl.TabPages.Remove(tabControl.SelectedTab);
         }
+        private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            // The e.Url parameter contains the target URL.
+            string targetUrl = e.Url.ToString();
+            // You can update UI or perform actions based on the targetUrl.
+        }
+
+        private void UpdateUI()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(UpdateUI));
+                return;
+            }
+
+            // Update UI elements here
+            SearchBar.Text = currentURL;
+        }
+
+
     }
 }
