@@ -21,6 +21,12 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
+            SizeChanged += Form1_SizeChanged;
+        }
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            // Update the size of the WebBrowser control to fit the form's client area
+            webBrowser.Size = new Size(this.ClientSize.Width, this.ClientSize.Height);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -28,6 +34,7 @@ namespace WindowsFormsApp1
             webBrowser.Navigate("www.duckduckgo.com");
             //SearchBar.Text = "www.duckduckgo.com";
         }
+
 
         private void webBrowser10_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
@@ -131,6 +138,8 @@ namespace WindowsFormsApp1
         {
             if (e.KeyChar == (Char)13)
             {
+                e.Handled = true;
+
                 string inputText = SearchBar.Text.Trim();
 
                 // Check if the input is a valid URL
@@ -178,7 +187,5 @@ namespace WindowsFormsApp1
             // Update UI elements here
             SearchBar.Text = currentURL;
         }
-
-
     }
 }

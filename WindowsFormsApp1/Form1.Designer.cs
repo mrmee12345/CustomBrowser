@@ -34,7 +34,6 @@ namespace WindowsFormsApp1
             this.Back = new System.Windows.Forms.Button();
             this.SearchBar = new System.Windows.Forms.TextBox();
             this.Forward = new System.Windows.Forms.Button();
-            this.Search = new System.Windows.Forms.Button();
             this.Reload = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -46,12 +45,15 @@ namespace WindowsFormsApp1
             // 
             // webBrowser
             // 
-            this.webBrowser.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.webBrowser.Location = new System.Drawing.Point(3, 3);
             this.webBrowser.MaximumSize = new System.Drawing.Size(1920, 1080);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
             this.webBrowser.ScriptErrorsSuppressed = true;
-            this.webBrowser.Size = new System.Drawing.Size(1226, 613);
+            this.webBrowser.Size = new System.Drawing.Size(1269, 690);
             this.webBrowser.TabIndex = 9;
             this.webBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser10_DocumentCompleted);
             // 
@@ -59,9 +61,9 @@ namespace WindowsFormsApp1
             // 
             this.Back.AutoSize = true;
             this.Back.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Back.Location = new System.Drawing.Point(12, 15);
+            this.Back.Location = new System.Drawing.Point(7, 21);
             this.Back.Name = "Back";
-            this.Back.Size = new System.Drawing.Size(33, 30);
+            this.Back.Size = new System.Drawing.Size(28, 30);
             this.Back.TabIndex = 10;
             this.Back.Text = "<";
             this.Back.UseVisualStyleBackColor = true;
@@ -69,9 +71,11 @@ namespace WindowsFormsApp1
             // 
             // SearchBar
             // 
-            this.SearchBar.Location = new System.Drawing.Point(179, 17);
+            this.SearchBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SearchBar.Location = new System.Drawing.Point(155, 23);
             this.SearchBar.Name = "SearchBar";
-            this.SearchBar.Size = new System.Drawing.Size(947, 26);
+            this.SearchBar.Size = new System.Drawing.Size(1031, 26);
             this.SearchBar.TabIndex = 11;
             this.SearchBar.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.SearchBar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchBar_KeyPress);
@@ -80,7 +84,7 @@ namespace WindowsFormsApp1
             // 
             this.Forward.AutoSize = true;
             this.Forward.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Forward.Location = new System.Drawing.Point(51, 15);
+            this.Forward.Location = new System.Drawing.Point(40, 21);
             this.Forward.Name = "Forward";
             this.Forward.Size = new System.Drawing.Size(28, 30);
             this.Forward.TabIndex = 12;
@@ -88,23 +92,11 @@ namespace WindowsFormsApp1
             this.Forward.UseVisualStyleBackColor = true;
             this.Forward.Click += new System.EventHandler(this.button2_Click);
             // 
-            // Search
-            // 
-            this.Search.AutoSize = true;
-            this.Search.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Search.Location = new System.Drawing.Point(1132, 15);
-            this.Search.Name = "Search";
-            this.Search.Size = new System.Drawing.Size(75, 30);
-            this.Search.TabIndex = 13;
-            this.Search.Text = "Search";
-            this.Search.UseVisualStyleBackColor = true;
-            this.Search.Click += new System.EventHandler(this.button3_Click);
-            // 
             // Reload
             // 
             this.Reload.AutoSize = true;
             this.Reload.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Reload.Location = new System.Drawing.Point(98, 15);
+            this.Reload.Location = new System.Drawing.Point(74, 21);
             this.Reload.Name = "Reload";
             this.Reload.Size = new System.Drawing.Size(75, 30);
             this.Reload.TabIndex = 14;
@@ -114,11 +106,14 @@ namespace WindowsFormsApp1
             // 
             // tabControl
             // 
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabPage1);
-            this.tabControl.Location = new System.Drawing.Point(12, 56);
+            this.tabControl.Location = new System.Drawing.Point(0, 70);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1237, 646);
+            this.tabControl.Size = new System.Drawing.Size(1283, 659);
             this.tabControl.TabIndex = 15;
             // 
             // tabPage1
@@ -127,7 +122,7 @@ namespace WindowsFormsApp1
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1229, 613);
+            this.tabPage1.Size = new System.Drawing.Size(1275, 626);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -135,8 +130,9 @@ namespace WindowsFormsApp1
             // 
             // NewTab
             // 
+            this.NewTab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.NewTab.AutoSize = true;
-            this.NewTab.Location = new System.Drawing.Point(1213, 15);
+            this.NewTab.Location = new System.Drawing.Point(1203, 21);
             this.NewTab.Name = "NewTab";
             this.NewTab.Size = new System.Drawing.Size(28, 30);
             this.NewTab.TabIndex = 16;
@@ -146,8 +142,9 @@ namespace WindowsFormsApp1
             // 
             // CloseTab
             // 
+            this.CloseTab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CloseTab.AutoSize = true;
-            this.CloseTab.Location = new System.Drawing.Point(1247, 15);
+            this.CloseTab.Location = new System.Drawing.Point(1237, 21);
             this.CloseTab.Name = "CloseTab";
             this.CloseTab.Size = new System.Drawing.Size(30, 30);
             this.CloseTab.TabIndex = 17;
@@ -166,13 +163,12 @@ namespace WindowsFormsApp1
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1283, 729);
             this.Controls.Add(this.CloseTab);
-            this.Controls.Add(this.NewTab);
             this.Controls.Add(this.tabControl);
-            this.Controls.Add(this.Back);
-            this.Controls.Add(this.Forward);
+            this.Controls.Add(this.NewTab);
             this.Controls.Add(this.Reload);
-            this.Controls.Add(this.Search);
+            this.Controls.Add(this.Forward);
             this.Controls.Add(this.SearchBar);
+            this.Controls.Add(this.Back);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "The PP browser";
@@ -188,7 +184,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.Button Back;
         private System.Windows.Forms.Button Forward;
-        private System.Windows.Forms.Button Search;
         private System.Windows.Forms.Button Reload;
         private System.Windows.Forms.TextBox SearchBar;
         private System.Windows.Forms.TabControl tabControl;
