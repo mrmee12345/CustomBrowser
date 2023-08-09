@@ -25,25 +25,21 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            webBrowser.Navigate("www.google.com");
+            webBrowser.Navigate("www.duckduckgo.com");
             //SearchBar.Text = "www.duckduckgo.com";
-
-            // Start a background thread
-            Task.Run(() =>
-            {
-                while (true)
-                {
-                    // Code to run continuously
-                    UpdateUI();
-                    Thread.Sleep(1000); // Sleep for 1 second
-                }
-            });
         }
 
         private void webBrowser10_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            currentURL = webBrowser.Url.ToString();
-            tabControl.SelectedTab.Text = webBrowser.DocumentTitle;
+            string newURL = webBrowser.Url.ToString();
+
+            // Check if the new URL is different from the current URL
+            if (newURL != currentURL)
+            {
+                currentURL = newURL;
+                UpdateUI(); // Update the UI with the new URL
+                tabControl.SelectedTab.Text = webBrowser.DocumentTitle;
+            }
         }
 
 
@@ -52,8 +48,8 @@ namespace WindowsFormsApp1
             WebBrowser web = tabControl.SelectedTab.Controls[0] as WebBrowser;
             if (web != null)
             {
-                web.Navigate(SearchBar.Text);
-                //History.Add(SearchBar.Text);
+               web.Navigate(SearchBar.Text);
+               //History.Add(SearchBar.Text);
             }
         }
 
@@ -91,11 +87,18 @@ namespace WindowsFormsApp1
 
         }
 
-        private void webBrowser14_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        /*private void webBrowser14_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            currentURL = webBrowser.Url.ToString();
-            tabControl.SelectedTab.Text = webBrowser.DocumentTitle;
-        }
+            string newURL = webBrowser.Url.ToString();
+
+            // Check if the new URL is different from the current URL
+            if (newURL != currentURL)
+            {
+                currentURL = newURL;
+                UpdateUI(); // Update the UI with the new URL
+                tabControl.SelectedTab.Text = webBrowser.DocumentTitle;
+            }
+        }*/
 
         WebBrowser webTab = null;
 
