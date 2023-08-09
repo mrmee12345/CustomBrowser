@@ -87,19 +87,6 @@ namespace WindowsFormsApp1
 
         }
 
-        /*private void webBrowser14_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            string newURL = webBrowser.Url.ToString();
-
-            // Check if the new URL is different from the current URL
-            if (newURL != currentURL)
-            {
-                currentURL = newURL;
-                UpdateUI(); // Update the UI with the new URL
-                tabControl.SelectedTab.Text = webBrowser.DocumentTitle;
-            }
-        }*/
-
         WebBrowser webTab = null;
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -144,10 +131,27 @@ namespace WindowsFormsApp1
         {
             if (e.KeyChar == (Char)13)
             {
-                WebBrowser web = tabControl.SelectedTab.Controls[0] as WebBrowser;
-                if (web != null)
+                string inputText = SearchBar.Text.Trim();
+
+                // Check if the input is a valid URL
+                if (Uri.TryCreate(inputText, UriKind.Absolute, out Uri uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
                 {
-                    web.Navigate(SearchBar.Text);
+                    // Valid URL, navigate to it
+                    WebBrowser web = tabControl.SelectedTab.Controls[0] as WebBrowser;
+                    if (web != null)
+                    {
+                        web.Navigate(inputText);
+                    }
+                }
+                else
+                {
+                    // Invalid URL, perform a DuckDuckGo search
+                    string searchUrl = "https://duckduckgo.com/?q=" + Uri.EscapeDataString(inputText);
+                    WebBrowser web = tabControl.SelectedTab.Controls[0] as WebBrowser;
+                    if (web != null)
+                    {
+                        web.Navigate(searchUrl);
+                    }
                 }
             }
         }
