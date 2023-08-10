@@ -35,6 +35,7 @@
             this.Reload = new System.Windows.Forms.Button();
             this.NewTab = new System.Windows.Forms.Button();
             this.CloseTab = new System.Windows.Forms.Button();
+            this.tabControl = new System.Windows.Forms.TabControl();
             this.SuspendLayout();
             // 
             // Back
@@ -53,8 +54,11 @@
             // 
             this.SearchBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.SearchBar.BackColor = System.Drawing.SystemColors.InfoText;
+            this.SearchBar.ForeColor = System.Drawing.SystemColors.Window;
             this.SearchBar.Location = new System.Drawing.Point(166, 23);
             this.SearchBar.Name = "SearchBar";
+            this.SearchBar.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.SearchBar.Size = new System.Drawing.Size(1031, 26);
             this.SearchBar.TabIndex = 11;
             this.SearchBar.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -76,6 +80,7 @@
             // 
             this.Reload.AutoSize = true;
             this.Reload.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Reload.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Reload.Location = new System.Drawing.Point(74, 21);
             this.Reload.Name = "Reload";
             this.Reload.Size = new System.Drawing.Size(75, 30);
@@ -94,6 +99,7 @@
             this.NewTab.TabIndex = 16;
             this.NewTab.Text = "+";
             this.NewTab.UseVisualStyleBackColor = true;
+            this.NewTab.Click += new System.EventHandler(this.NewTab_Click);
             // 
             // CloseTab
             // 
@@ -107,6 +113,17 @@
             this.CloseTab.UseVisualStyleBackColor = true;
             this.CloseTab.Click += new System.EventHandler(this.CloseTab_Click);
             // 
+            // tabControl
+            // 
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl.Location = new System.Drawing.Point(7, 74);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(1260, 643);
+            this.tabControl.TabIndex = 18;
+            // 
             // Form1
             // 
             this.AccessibleName = "o";
@@ -116,7 +133,9 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1283, 729);
+            this.Controls.Add(this.tabControl);
             this.Controls.Add(this.CloseTab);
             this.Controls.Add(this.NewTab);
             this.Controls.Add(this.Reload);
@@ -139,5 +158,6 @@
         private System.Windows.Forms.TextBox SearchBar;
         private System.Windows.Forms.Button NewTab;
         private System.Windows.Forms.Button CloseTab;
+        private System.Windows.Forms.TabControl tabControl;
     }
 }
