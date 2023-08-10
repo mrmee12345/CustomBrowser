@@ -1,5 +1,4 @@
-﻿
-namespace WindowsFormsApp1
+﻿namespace WindowsFormsApp1
 {
     partial class Form1
     {
@@ -30,32 +29,13 @@ namespace WindowsFormsApp1
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.Back = new System.Windows.Forms.Button();
             this.SearchBar = new System.Windows.Forms.TextBox();
             this.Forward = new System.Windows.Forms.Button();
             this.Reload = new System.Windows.Forms.Button();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.NewTab = new System.Windows.Forms.Button();
             this.CloseTab = new System.Windows.Forms.Button();
-            this.tabControl.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // webBrowser
-            // 
-            this.webBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.webBrowser.Location = new System.Drawing.Point(3, 3);
-            this.webBrowser.MaximumSize = new System.Drawing.Size(1920, 1080);
-            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser.Name = "webBrowser";
-            this.webBrowser.ScriptErrorsSuppressed = true;
-            this.webBrowser.Size = new System.Drawing.Size(1269, 690);
-            this.webBrowser.TabIndex = 9;
-            this.webBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser10_DocumentCompleted);
             // 
             // Back
             // 
@@ -104,30 +84,6 @@ namespace WindowsFormsApp1
             this.Reload.UseVisualStyleBackColor = true;
             this.Reload.Click += new System.EventHandler(this.button4_Click);
             // 
-            // tabControl
-            // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl.Controls.Add(this.tabPage1);
-            this.tabControl.Location = new System.Drawing.Point(0, 70);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1283, 659);
-            this.tabControl.TabIndex = 15;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.webBrowser);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1275, 626);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click_1);
-            // 
             // NewTab
             // 
             this.NewTab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -138,7 +94,6 @@ namespace WindowsFormsApp1
             this.NewTab.TabIndex = 16;
             this.NewTab.Text = "+";
             this.NewTab.UseVisualStyleBackColor = true;
-            this.NewTab.Click += new System.EventHandler(this.NewTab_Click);
             // 
             // CloseTab
             // 
@@ -163,7 +118,6 @@ namespace WindowsFormsApp1
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1283, 729);
             this.Controls.Add(this.CloseTab);
-            this.Controls.Add(this.tabControl);
             this.Controls.Add(this.NewTab);
             this.Controls.Add(this.Reload);
             this.Controls.Add(this.Forward);
@@ -173,23 +127,17 @@ namespace WindowsFormsApp1
             this.Name = "Form1";
             this.Text = "The PP browser";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.tabControl.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.Button Back;
         private System.Windows.Forms.Button Forward;
         private System.Windows.Forms.Button Reload;
         private System.Windows.Forms.TextBox SearchBar;
-        private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button NewTab;
         private System.Windows.Forms.Button CloseTab;
     }
 }
-

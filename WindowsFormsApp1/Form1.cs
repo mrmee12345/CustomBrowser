@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
+using CefSharp.WinForms;
+using CefSharp;
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        private ChromiumWebBrowser browser;
 
         private string currentURL = "";
 
@@ -21,71 +24,58 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
-            SizeChanged += Form1_SizeChanged;
-        }
-        private void Form1_SizeChanged(object sender, EventArgs e)
-        {
-            // Update the size of the WebBrowser control to fit the form's client area
-            webBrowser.Size = new Size(this.ClientSize.Width, this.ClientSize.Height);
+
+            // Initialize CefSharp settings
+            CefSettings settings = new CefSettings();
+            Cef.Initialize(settings);
+
+            browser = new ChromiumWebBrowser();
+            browser.Size = new Size(1264, 660);
+            browser.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right;
+            browser.Dock = DockStyle.Fill;
+            Controls.Add(browser);
+
+
+
+            // Load a URL in the ChromiumWebBrowser
+            browser.Load("https://www.duckduckgo.com");
+
+            browser.LoadingStateChanged += Browser_LoadingStateChanged;
         }
 
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Cef.Shutdown();
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
-            webBrowser.Navigate("www.duckduckgo.com");
-            //SearchBar.Text = "www.duckduckgo.com";
+
         }
 
-
-        private void webBrowser10_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        private void Browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
         {
-            string newURL = webBrowser.Url.ToString();
 
-            // Check if the new URL is different from the current URL
-            if (newURL != currentURL)
-            {
-                currentURL = newURL;
-                UpdateUI(); // Update the UI with the new URL
-                tabControl.SelectedTab.Text = webBrowser.DocumentTitle;
-            }
-        }
-
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            WebBrowser web = tabControl.SelectedTab.Controls[0] as WebBrowser;
-            if (web != null)
-            {
-               web.Navigate(SearchBar.Text);
-               //History.Add(SearchBar.Text);
-            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            webBrowser.Refresh();
+            browser.Refresh();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            WebBrowser web = tabControl.SelectedTab.Controls[0] as WebBrowser;
-            if (web != null)
+            if (browser.CanGoBack)
             {
-                if (web.CanGoBack)
-                {
-                    web.GoBack();
-                }
+                browser.Back();
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            WebBrowser web = tabControl.SelectedTab.Controls[0] as WebBrowser;
-            if (web != null)
+            //ChromiumWebBrowser web = tabControl.SelectedTab.Controls[0] as WebBrowser;
+            if (browser.CanGoForward)
             {
-                if (web.CanGoForward)
-                {
-                    web.GoForward();
-                }
+                browser.Forward();
             }
         }
 
@@ -98,7 +88,7 @@ namespace WindowsFormsApp1
 
         private void tabPage1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void tabPage1_Click_1(object sender, EventArgs e)
@@ -111,7 +101,7 @@ namespace WindowsFormsApp1
 
         }
 
-        private void NewTab_Click(object sender, EventArgs e)
+        /*private void NewTab_Click(object sender, EventArgs e)
         {
             TabPage tab = new TabPage();
             tab.Text = "New tab";
@@ -132,7 +122,7 @@ namespace WindowsFormsApp1
         private void webTag_DocumentCompleted(Object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             tabControl.SelectedTab.Text = webTab.DocumentTitle;
-        }
+        }*/
 
         private void SearchBar_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -146,29 +136,22 @@ namespace WindowsFormsApp1
                 if (Uri.TryCreate(inputText, UriKind.Absolute, out Uri uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
                 {
                     // Valid URL, navigate to it
-                    WebBrowser web = tabControl.SelectedTab.Controls[0] as WebBrowser;
-                    if (web != null)
-                    {
-                        web.Navigate(inputText);
-                    }
+                    browser.Load(inputText);
                 }
                 else
                 {
                     // Invalid URL, perform a DuckDuckGo search
                     string searchUrl = "https://duckduckgo.com/?q=" + Uri.EscapeDataString(inputText);
-                    WebBrowser web = tabControl.SelectedTab.Controls[0] as WebBrowser;
-                    if (web != null)
-                    {
-                        web.Navigate(searchUrl);
-                    }
+                    browser.Load(searchUrl);
                 }
             }
         }
 
         private void CloseTab_Click(object sender, EventArgs e)
         {
-            tabControl.TabPages.Remove(tabControl.SelectedTab);
+            //tabControl.TabPages.Remove(tabControl.SelectedTab);
         }
+
         private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             // The e.Url parameter contains the target URL.
@@ -186,6 +169,11 @@ namespace WindowsFormsApp1
 
             // Update UI elements here
             SearchBar.Text = currentURL;
+        }
+
+        private void chromiumWebBrowser1_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
+        {
+
         }
     }
 }
