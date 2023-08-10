@@ -53,7 +53,7 @@
             // 
             this.SearchBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SearchBar.Location = new System.Drawing.Point(155, 23);
+            this.SearchBar.Location = new System.Drawing.Point(166, 23);
             this.SearchBar.Name = "SearchBar";
             this.SearchBar.Size = new System.Drawing.Size(1031, 26);
             this.SearchBar.TabIndex = 11;
