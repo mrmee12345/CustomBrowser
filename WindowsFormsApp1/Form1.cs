@@ -27,9 +27,17 @@ namespace WindowsFormsApp1
 
             // Initialize CefSharp settings
             CefSettings settings = new CefSettings();
+            settings.CefCommandLineArgs.Add("remote-debugging-port", "8088");
+            settings.CefCommandLineArgs.Add("enable-media-stream", "1");
             Cef.Initialize(settings);
 
             AddTab("https://www.duckduckgo.com");
+
+            var downloadHandler = new DownloadHandler();
+            downloadHandler.OnBeforeDownloadFired += OnBeforeDownload;
+            browser.DownloadHandler = downloadHandler;
+
+
 
             browser = new ChromiumWebBrowser();
             browser.Dispose();
@@ -42,6 +50,25 @@ namespace WindowsFormsApp1
             browser.Load("https://www.duckduckgo.com");*/
 
             browser.LoadingStateChanged += Browser_LoadingStateChanged;
+        }
+        private void OnBeforeDownload(object sender, DownloadItem e)
+        {
+            // Display a dialog to choose the download location
+            using (var dialog = new SaveFileDialog())
+            {
+                dialog.FileName = e.SuggestedFileName;
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Set the chosen download path
+                    e.SuggestedFileName = dialog.FileName;
+                    e.IsCancelled = false;
+                }
+                else
+                {
+                    // Cancel the download if the user cancels the dialog
+                    e.IsCancelled = true;
+                }
+            }
         }
 
         private void AddTab(string url)
@@ -73,6 +100,7 @@ namespace WindowsFormsApp1
 
             tabControl.SelectedIndex = tabControl.TabPages.IndexOf(tabPage);
         }
+
         private void UpdateTabInfo(TabPage tabPage, string url)
         {
             // Update the tab's text and store the URL in the Tag property
